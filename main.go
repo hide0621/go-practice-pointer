@@ -5,12 +5,9 @@ import "fmt"
 func main() {
 
 	var hoge string = "テストです"
-
 	var pointer *string = &hoge
 
 	// "テストです"
-	fmt.Println(hoge)
+	fmt.Println(*pointer)
 
-	// アドレス "0x000096210"
-	fmt.Println(pointer)
 }
