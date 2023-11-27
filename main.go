@@ -44,6 +44,9 @@ func main() {
 	fmt.Println(p)           //&{斉藤 一 35}
 	fmt.Println(p.FirstName) //斉藤
 
+	p.FirstName = "一条"
+	fmt.Println(p.FirstName) //一条
+
 	//値型のインスタンスを作成
 	personValue := NewPersonValue("佐藤", "二郎", 25)
 
@@ -62,5 +65,8 @@ func main() {
 	}
 	fmt.Println(v)           //{沖田 総司 18}
 	fmt.Println(v.FirstName) //沖田
+
+	v.FirstName = "轟"
+	fmt.Println(v.FirstName) //轟
 
 }
