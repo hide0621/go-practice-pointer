@@ -4,19 +4,22 @@ import "fmt"
 
 func main() {
 
-	x := 1
+	s1 := []int{1, 2, 3, 4}
+	s2 := s1
 
-	var y *int = &x
+	fmt.Println(&s1) //&[1 2 3 4]
+	fmt.Println(&s2) //&[1 2 3 4]
 
-	fmt.Println(x)  //1
-	fmt.Println(*y) //1
+	fmt.Println(s1)     // [1 2 3 4]
+	fmt.Println(s2)     // [1 2 3 4]
+	fmt.Println(&s1[0]) // 0xc000100000
+	fmt.Println(&s2[0]) // 0xc000100000
 
-	*y++
+	s2[2] = 5
 
-	fmt.Println(x)  // 2
-	fmt.Println(&x) //0x140000180a0
-
-	fmt.Println(*y) // 2
-	fmt.Println(&y) //0x1400000e028
+	fmt.Println(s1)     // [1 2 5 4]
+	fmt.Println(s2)     // [1 2 5 4]
+	fmt.Println(&s1[2]) // 0xc000100010
+	fmt.Println(&s2[2]) // 0xc000100010
 
 }
