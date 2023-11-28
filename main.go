@@ -6,16 +6,17 @@ func main() {
 
 	x := 1
 
-	// xの値がコピー
-	y := x
+	var y *int = &x
 
-	// yの操作はxに影響しない
-	y++
+	fmt.Println(x)  //1
+	fmt.Println(*y) //1
 
-	fmt.Println(x)  // 1
-	fmt.Println(&x) //0x140000a2008
+	*y++
 
-	fmt.Println(y)  // 2
-	fmt.Println(&y) //0x140000a2010
+	fmt.Println(x)  // 2
+	fmt.Println(&x) //0x140000180a0
+
+	fmt.Println(*y) // 2
+	fmt.Println(&y) //0x1400000e028
 
 }
