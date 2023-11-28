@@ -4,20 +4,18 @@ import "fmt"
 
 func main() {
 
-	var p *int
-	if p == nil {
-		fmt.Println("p is nil")
-	} else {
-		fmt.Println("p is not nil")
-	}
-	// p is nil
+	x := 1
 
-	switch {
-	case p == nil:
-		fmt.Println("p is nil")
-	default:
-		fmt.Println("p is not nil")
-	}
-	// p is nil
+	// xの値がコピー
+	y := x
+
+	// yの操作はxに影響しない
+	y++
+
+	fmt.Println(x)  // 1
+	fmt.Println(&x) //0x140000a2008
+
+	fmt.Println(y)  // 2
+	fmt.Println(&y) //0x140000a2010
 
 }
