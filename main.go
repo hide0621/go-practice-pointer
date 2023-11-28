@@ -4,12 +4,20 @@ import "fmt"
 
 func main() {
 
-	a := 42
-	b := &a
+	var p *int
+	if p == nil {
+		fmt.Println("p is nil")
+	} else {
+		fmt.Println("p is not nil")
+	}
+	// p is nil
 
-	fmt.Println(a) //42
-	fmt.Println(b) //0x140000a4008
+	switch {
+	case p == nil:
+		fmt.Println("p is nil")
+	default:
+		fmt.Println("p is not nil")
+	}
+	// p is nil
 
-	fmt.Println(*b) //42
-	fmt.Println(&b) //0x1400009e018
 }
