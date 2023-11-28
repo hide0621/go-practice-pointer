@@ -28,6 +28,14 @@ func main() {
 	fmt.Println(&y)                      //&{2}
 	fmt.Println("memory address:", &y.v) //0x14000126010
 
+	a := x //値型なのでx.vの値の更新はされない(オブジェクトxのコピーが渡されている)
+	a.v = 50
+
+	fmt.Println(a.v)                     //50
+	fmt.Println(x.v)                     //1
+	fmt.Println("memory address:", &a.v) //x.vとは違うメモリアドレス
+	fmt.Println("memory address:", &x.v) //0x140000180a0
+
 	z := &hoge{
 		v: 3,
 	}
