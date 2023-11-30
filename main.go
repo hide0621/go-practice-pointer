@@ -45,4 +45,23 @@ func main() {
 	fmt.Printf("Address of m1: %p\n", &m1) //0x14000114018
 	fmt.Printf("Address of m2: %p\n", &m2) //0x14000114028
 
+	m3 := &map[int]string{
+		1: "田中",
+		2: "太郎",
+	}
+	m4 := m3
+	fmt.Printf("Address of m3: %p\n", &m3) //Address of m3: 0x14000120030
+	fmt.Printf("Address of m4: %p\n", &m4) //Address of m4: 0x14000120040
+	fmt.Println("m3:", m3)                 //m3: &map[1:田中 2:太郎]
+	fmt.Println("m4:", m4)                 //m4: &map[1:田中 2:太郎]
+
+	m4 = &map[int]string{
+		1: "山崎",
+		2: "一番",
+	}
+	fmt.Println("m3:", m3)                 //m3: &map[1:田中 2:太郎]
+	fmt.Println("m4:", m4)                 //m4: &map[1:山崎 2:一番]
+	fmt.Printf("Address of m3: %p\n", &m3) //Address of m3: 0x14000120030
+	fmt.Printf("Address of m4: %p\n", &m4) //Address of m4: 0x14000120040
+
 }
