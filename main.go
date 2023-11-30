@@ -3,80 +3,46 @@ package main
 import "fmt"
 
 func main() {
-
-	type hoge struct {
-		v int
+	m1 := map[int]string{
+		1: "山田",
+		2: "鈴木",
 	}
 
-	x := hoge{
-		v: 1,
+	fmt.Printf("Address of m1: %p\n", &m1) //0x14000114018
+	fmt.Println(m1[1])                     //山田
+
+	m2 := m1
+
+	fmt.Printf("Address of m2: %p\n", &m2) //0x14000114028
+	fmt.Println("key1 of m2:", m2[1])      //山田
+	fmt.Println("key1 of m1:", m1[1])      //山田
+
+	m2[1] = "John" //m1[1]の値も書き変わる
+
+	fmt.Println("key1 of m2:", m2[1])      //John
+	fmt.Println("key1 of m1:", m1[1])      //John
+	fmt.Printf("Address of m1: %p\n", &m1) //0x14000114018
+	fmt.Printf("Address of m2: %p\n", &m2) //0x14000114028
+
+	m2 = make(map[int]string)
+	m2[1] = "x"                            //m1[1]の値は変わらない
+	fmt.Printf("Address of m2: %p\n", &m2) //0x14000114028
+	fmt.Println("key1 of m1:", m1[1])      //John
+	fmt.Println("key1 of m2:", m2[1])      //x
+
+	m2 = map[int]string{
+		1: "y",
+		2: "z",
 	}
+	fmt.Printf("Address of m2: %p\n", &m2) //0x14000114028
+	fmt.Println("key1 of m1:", m1[1])      //John //m1[1]の値は変わらない
+	fmt.Println("key1 of m2:", m2[1])      //y
 
-	y := hoge{
-		v: 2,
-	}
+	m2[1] = "John" //m1[1]の値も書き変わる
 
-	fmt.Println(x)   //{1}
-	fmt.Println(x.v) //1
-
-	fmt.Println(&x)                      //&{1}
-	fmt.Println("memory address:", &x.v) //0x140000180a0
-
-	fmt.Println(y)   //{2}
-	fmt.Println(y.v) //2
-
-	fmt.Println(&y)                      //&{2}
-	fmt.Println("memory address:", &y.v) //0x14000126010
-
-	a := x //値型なのでx.vの値の更新はされない(オブジェクトxのコピーが渡されている)
-	a.v = 50
-
-	fmt.Println(a.v)                     //50
-	fmt.Println(x.v)                     //1
-	fmt.Println("memory address:", &a.v) //x.vとは違うメモリアドレス
-	fmt.Println("memory address:", &x.v) //0x140000180a0
-
-	z := &hoge{
-		v: 3,
-	}
-
-	fmt.Println(z)                       //&{3}
-	fmt.Println(z.v)                     //3
-	fmt.Println("memory address:", &z)   //0x14000120020
-	fmt.Println("memory address:", &z.v) //0x14000126040
-
-	fmt.Println(x.v)                     //1
-	fmt.Println("memory address:", &x.v) //0x140000180a0
-	fmt.Println(y.v)                     //2
-	fmt.Println("memory address:", &y.v) //0x14000126010
-
-	w := &hoge{
-		v: 4,
-	} //この段階ではまだ値が共有される環境にはなっていない
-
-	fmt.Println(w)                       //&{4}
-	fmt.Println(w.v)                     //4
-	fmt.Println("memory address:", &w)   //0x14000120028
-	fmt.Println("memory address:", &w.v) //0x14000126050
-
-	fmt.Println(z)                       //&{3}
-	fmt.Println(z.v)                     //3のまま
-	fmt.Println("memory address:", &z)   //0x14000120020
-	fmt.Println("memory address:", &z.v) //0x14000126040
-
-	v := z //参照(ポインタ)が渡され、オブジェクトvとオブジェクトzの間で値が共有される環境になった
-
-	fmt.Println(v.v) //3
-
-	v.v = 100
-
-	fmt.Println(z.v)                     //3ではなく100になる
-	fmt.Println("memory address:", &z.v) //0x14000126040
-	fmt.Println("memory address:", &v.v) //0x14000126040
-	fmt.Println("memory address:", &z)   //0x14000120020
-	fmt.Println("memory address:", &v)   //0x14000120030
-
-	fmt.Println(w.v)                     //4
-	fmt.Println("memory address:", &w.v) //0x14000126050
+	fmt.Println("key1 of m2:", m2[1])      //John
+	fmt.Println("key1 of m1:", m1[1])      //John
+	fmt.Printf("Address of m1: %p\n", &m1) //0x14000114018
+	fmt.Printf("Address of m2: %p\n", &m2) //0x14000114028
 
 }
